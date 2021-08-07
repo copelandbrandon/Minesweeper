@@ -5,7 +5,9 @@
   background-color: greenyellow;
   height: 75px;
   width: 75px;
-  border: 1px solid green
+  border: 1px solid green;
+  min-width: 75px;
+  min-height: 75px;
 }
 
 .tile.clicked{

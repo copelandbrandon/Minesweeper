@@ -1,0 +1,13 @@
+.game-board{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  height: 1232px;
+  width: 1232px;
+}
+
+.outer-board{
+  display: flex;
+  justify-content: center;
+}
