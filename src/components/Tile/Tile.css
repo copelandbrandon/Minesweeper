@@ -8,6 +8,8 @@
   border: 1px solid green;
   min-width: 75px;
   min-height: 75px;
+  font-size: larger;
+  font-weight: bold;
 }
 
 .tile.clicked{
@@ -17,4 +19,14 @@
 
 .tile.flagged{
   color: red;
+}
+
+.tile.tile-even{
+  background-color: green;
+  border: 1px solid darkgreen;
+}
+
+.tile.tile-even.clicked{
+  background-color: brown;
+  border: 1px solid rgb(122, 30, 30);
 }

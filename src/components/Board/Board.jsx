@@ -4,6 +4,40 @@ import Tile from '../Tile/Tile';
 
 export default function Board(props) {
 
+  const countBombs = function(array) {
+    console.log(array);
+    let returnArray = array.map(tile => {
+      let index = tile.key;
+      let numBombs = 0;
+      if (array[index - 1] !== undefined && array[index - 1].bomb) {
+        numBombs ++;
+      }
+      if (array[index + 1] !== undefined && array[index + 1].bomb) {
+        numBombs ++;
+      }
+      if (array[index + 15] !== undefined && array[index + 15].bomb) {
+        numBombs ++;
+      }
+      if (array[index + 16] !== undefined && array[index + 16].bomb) {
+        numBombs ++;
+      }
+      if (array[index + 17] !== undefined && array[index + 17].bomb) {
+        numBombs ++;
+      }
+      if (array[index - 15] !== undefined && array[index - 15].bomb) {
+        numBombs ++;
+      }
+      if (array[index - 16] !== undefined && array[index - 16].bomb) {
+        numBombs ++;
+      }
+      if (array[index - 17] !== undefined && array[index - 17].bomb) {
+        numBombs ++;
+      }
+      return {key: tile.key, bomb: tile.bomb, numAdjacentBombs: numBombs}
+    })
+    console.log("returned", returnArray);
+    return returnArray;
+  };
 
   const composeGameBoard = function() {
     let numBombs = 40;
@@ -21,12 +55,16 @@ export default function Board(props) {
     return tileArray;
   }
 
-  let gameBoardArray = composeGameBoard();
-  let gameBoard = gameBoardArray.map(isBomb => {
+  let tilesArray = composeGameBoard();
+  let completedTilesArray = countBombs(tilesArray);
+
+  let gameBoard = completedTilesArray.map(tile => {
     return (
       <Tile
-      key={isBomb.key}
-      bomb={isBomb.bomb}
+      key={tile.key}
+      key_value={tile.key}
+      bomb={tile.bomb}
+      adjacentBombs={tile.numAdjacentBombs}
       />
     );
   })
