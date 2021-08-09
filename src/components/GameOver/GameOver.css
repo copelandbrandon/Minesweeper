@@ -1,0 +1,28 @@
+.game-over-window{
+  position: fixed;
+  border: 2px solid black;
+  left: 39%;
+  height: 500px;
+  width: 500px;
+  background-color: green;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+.game-over{
+  margin-top: 20px;
+  font-size: xx-large;
+  font-weight: bolder;
+  text-decoration-line: underline;
+}
+
+.stats{
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  font-size: xx-large;
+}
+
+.num-stat{
+  margin-bottom: 20px;
+}

@@ -1,0 +1,22 @@
+.tool-tip{
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 200px;
+  background-color: green;
+  padding: 10px;
+  position: fixed;
+  right: 250px;
+  top: 100px;
+  border-radius: 10px;
+}
+
+.tip-title{
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+.controls{
+  margin-top: 35px;
+}

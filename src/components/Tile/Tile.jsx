@@ -1,17 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import FlagIcon from '@material-ui/icons/Flag';
 import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 import classNames from 'classnames';
 import './Tile.css';
+import { uncoverTile, flagTile, loseGame } from '../../Helpers/tileHelpers';
 
 export default function Tile(props) {
+
   const [tileClass, setTileClass] = useState("");
 
   let displayNumBombs = "";
-
+  //used to not display 0's on the board
   if (props.adjacentBombs !== 0 && props.bomb === false) {
     displayNumBombs = props.adjacentBombs;
   }
+
+  //reset classnames on restart
+  useEffect(()=>{
+
+    if (props.gameMode === "started" || props.gameMode === "restarted") {
+      setTileClass("");
+    }
+
+  }, [props.gameMode]);
 
   //creating checker pattern with classNames
   const visualClass = classNames(
@@ -25,36 +36,10 @@ export default function Tile(props) {
     {'three-or-more-bombs': displayNumBombs >= 3}
     );
 
-  
-  const uncoverTile = function() {
-    if(tileClass === "flagged") {
-      return;
-    }
-    setTileClass("clicked");
-  };
-
-  const flagTile = function() {
-    if (tileClass === "clicked") {
-      return;
-    } else if (tileClass === "") {
-      setTileClass("flagged");
-      props.countFlags((prev) => prev + 1);
-    } else {
-      setTileClass("");
-      props.countFlags((prev) => prev - 1);
-    }
-  };
-
-  const loseGame = function() {
-    if (props.bomb) {
-      props.gameOver("lost");
-    }
-  }
-
   return (
     <div
     className={`${visualClass} ${tileClass}`}
-    onClick={(event) => {loseGame(); event.shiftKey ? flagTile() : uncoverTile();}}
+    onClick={(event) => {loseGame(props.bomb, props.gameOver); event.shiftKey ? flagTile(tileClass, setTileClass, props.countFlags) : uncoverTile(tileClass, setTileClass);}}
     >
       {tileClass === "flagged" && <FlagIcon/>}
       {tileClass === "clicked" ? displayNumBombs : ""}
