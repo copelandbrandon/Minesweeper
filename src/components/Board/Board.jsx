@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Board.css';
 import Tile from '../Tile/Tile';
 
@@ -65,6 +65,8 @@ export default function Board(props) {
       key_value={tile.key}
       bomb={tile.bomb}
       adjacentBombs={tile.numAdjacentBombs}
+      countFlags={props.countFlags}
+      gameOver={props.gameOver}
       />
     );
   })
