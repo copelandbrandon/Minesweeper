@@ -37,6 +37,9 @@ export default function Tile(props) {
     );
 
     const notFlagging = function() {
+      if (tileClass === "flagged") {
+        return;
+      }
       uncoverTile(tileClass, setTileClass);
       loseGame(props.bomb, props.gameOver);
     };
