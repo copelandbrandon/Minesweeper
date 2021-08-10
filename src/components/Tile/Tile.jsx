@@ -36,10 +36,15 @@ export default function Tile(props) {
     {'three-or-more-bombs': displayNumBombs >= 3}
     );
 
+    const notFlagging = function() {
+      uncoverTile(tileClass, setTileClass);
+      loseGame(props.bomb, props.gameOver);
+    };
+
   return (
     <div
     className={`${visualClass} ${tileClass}`}
-    onClick={(event) => {loseGame(props.bomb, props.gameOver); event.shiftKey ? flagTile(tileClass, setTileClass, props.countFlags) : uncoverTile(tileClass, setTileClass);}}
+    onClick={(event) => {event.shiftKey ? flagTile(tileClass, setTileClass, props.countFlags) : notFlagging();}}
     >
       {tileClass === "flagged" && <FlagIcon/>}
       {tileClass === "clicked" ? displayNumBombs : ""}
